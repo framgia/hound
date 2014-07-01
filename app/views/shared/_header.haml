@@ -4,6 +4,8 @@
     %ul.nav
       %li
         = link_to 'Repos', root_path
+      %li
+        = link_to "Account", "/account"
       %li.dropdown
         %input#account-menu-toggle{type: 'checkbox'}
         %label.toggle{for: 'account-menu-toggle'} #{current_user}
