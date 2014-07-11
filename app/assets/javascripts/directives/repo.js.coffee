@@ -1,4 +1,4 @@
-App.directive 'repo', ->
+App.directive 'repo', ['Dialog', (Dialog) ->
   scope: true
 
   templateUrl: '/templates/repo'
@@ -23,4 +23,26 @@ App.directive 'repo', ->
       if repo.active
         deactivate(repo)
       else
-        activate(repo)
+        if repo.private == false
+          activate(repo)
+        else
+          Dialog.open(
+            'paymentDialog',
+            '/templates/payment_form',
+            repo,
+            {
+              draggable: false
+              resizable: false
+              autoOpen: false
+              modal: true
+            }
+          ).then(->
+            # success
+            console.log('closed')
+          , ->
+            # cancelled
+            console.log('cancelled')
+          ).finally(->
+            scope.processing = false
+          )
+]

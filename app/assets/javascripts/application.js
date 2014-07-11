@@ -1,3 +1,5 @@
+//= require jquery
+//= require jquery-ui.min
 //= require angular
 //= require angular-resource
 //= require_self

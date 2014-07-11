@@ -1,0 +1,15 @@
+#div{ 'ng-controller' => 'paymentDialogController' }
+  = form_tag do
+    = label_tag :card_number, 'Card Number'
+    = text_field_tag :card_number
+
+    = label_tag :expiration_month, 'Expiration Month'
+    = text_field_tag :expiration_month
+
+    = label_tag :expiration_year, 'Expiration Year'
+    = text_field_tag :expiration_year
+
+    = label_tag :cvc, 'CVC'
+    = text_field_tag :cvc
+
+    = button_tag 'Subscribe', 'ng-click' => 'subscribe()'
