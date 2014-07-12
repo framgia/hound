@@ -56,7 +56,7 @@ feature 'Repo list', js: true do
 
   scenario 'user activates repo' do
     user = create(:user)
-    repo = create(:repo)
+    repo = create(:repo, private: false)
     repo.users << user
     hook_url = "http://#{ENV['HOST']}/builds"
     stub_repo_request(repo.full_github_name)
@@ -65,7 +65,7 @@ feature 'Repo list', js: true do
     stub_user_emails_request(AuthenticationHelper::GITHUB_TOKEN)
 
     sign_in_as(user)
-    find(".repos .toggle").click
+    find('li.repo .toggle').click
 
     expect(page).to have_css('.active')
     expect(page).to have_content '1 OF 1'
@@ -78,7 +78,7 @@ feature 'Repo list', js: true do
 
   scenario 'user with admin access activates organization repo' do
     user = create(:user)
-    repo = create(:repo, full_github_name: 'testing/repo')
+    repo = create(:repo, private: false, full_github_name: 'testing/repo')
     repo.users << user
     hook_url = "http://#{ENV['HOST']}/builds"
     team_id = 4567 # from fixture

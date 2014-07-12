@@ -1,15 +1,15 @@
 #div{ 'ng-controller' => 'paymentDialogController' }
   = form_tag do
     = label_tag :card_number, 'Card Number'
-    = text_field_tag :card_number
+    = text_field_tag :card_number, 'ng-model' => 'model.cardNumber'
 
     = label_tag :expiration_month, 'Expiration Month'
-    = text_field_tag :expiration_month
+    = text_field_tag :expiration_month, 'ng-model' => 'model.expirationMonth'
 
     = label_tag :expiration_year, 'Expiration Year'
-    = text_field_tag :expiration_year
+    = text_field_tag :expiration_year, 'ng-model' => 'model.expirationYear'
 
     = label_tag :cvc, 'CVC'
-    = text_field_tag :cvc
+    = text_field_tag :cvc, 'ng-model' => 'model.cvc'
 
     = button_tag 'Subscribe', 'ng-click' => 'subscribe()'

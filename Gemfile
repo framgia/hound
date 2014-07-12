@@ -25,6 +25,7 @@ gem 'resque-sentry'
 gem 'rubocop', '0.22.0'
 gem 'sass-rails', '~> 4.0.2'
 gem 'sentry-raven'
+gem 'stripe'
 gem 'uglifier', '>= 1.0.3'
 gem 'unicorn'
 

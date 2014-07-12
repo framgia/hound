@@ -1,0 +1,24 @@
+App.controller('paymentDialogController', ['$scope', 'Dialog', 'Subscription', function($scope, Dialog, Subscription) {
+  Stripe.setPublishableKey('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>')
+
+  $scope.subscribe = function() {
+    event.preventDefault();
+
+    // do some Stripe stuff
+    Stripe.card.createToken({
+        number: $scope.cardNumber,
+        exp_month: $scope.expirationMonth,
+        exp_year: $scope.expirationYear,
+        cvc: $scope.cvc
+      }, function(status, response) {
+        subscription = new Subscription({
+          repo_id: $scope.model.id,
+          card_token: response.id
+        })
+        subscription.$save()
+      }
+    )
+
+    Dialog.close('paymentDialog', 'woohoo');
+  };
+}]);

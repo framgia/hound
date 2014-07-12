@@ -5,6 +5,7 @@ ENV['HOUND_GITHUB_TOKEN'] = 'houndgithubtoken'
 ENV['ENABLE_HTTPS'] = 'no'
 ENV['CHANGED_FILES_THRESHOLD'] = '300'
 ENV['REDISTOGO_URL'] = 'http://localhost:6379'
+ENV['STRIPE_API_KEY'] = 'sk_test_M7kGiZ992kSWZBeiz8DFPndS'
 
 Houndapp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
