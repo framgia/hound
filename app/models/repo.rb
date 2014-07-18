@@ -14,6 +14,22 @@ class Repo < ActiveRecord::Base
     update_attributes(active: false, hook_id: nil)
   end
 
+  def price
+    Subscription::PLANS.fetch(plan.to_sym)
+  end
+
+  def plan
+    if private
+      if in_organization
+        'organization'
+      else
+        'individual'
+      end
+    else
+      'free'
+    end
+  end
+
   def self.find_or_create_with(attributes)
     repo = where(github_id: attributes[:github_id]).first_or_initialize
     repo.update_attributes(attributes)
