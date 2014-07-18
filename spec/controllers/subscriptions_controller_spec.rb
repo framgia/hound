@@ -4,8 +4,6 @@ describe SubscriptionsController do
   STRIPE_CUSTOMER_ID = 'cus_2e3fqARc1uHtCv'
   STRIPE_SUBSCRIPTION_ID = 'sub_488ZZngNkyRMiR'
 
-  # test different types of plans
-
   describe '#create' do
     context 'when Stripe customer does not exist' do
       it 'creates a Stripe customer' do
@@ -131,7 +129,7 @@ describe SubscriptionsController do
       :post,
       "https://api.stripe.com/v1/customers/#{STRIPE_CUSTOMER_ID}/subscriptions"
     ).with(
-      body: { 'plan' => 'personal' },
+      body: { 'plan' => 'free' },
       headers: { 'Authorization' => "Bearer #{ENV['STRIPE_API_KEY']}",}
     ).to_return(
       status: 200,

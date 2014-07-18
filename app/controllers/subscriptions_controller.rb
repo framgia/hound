@@ -6,7 +6,7 @@ class SubscriptionsController < ApplicationController
       subscription.quantity = subscription.quantity + 1
       subscription.save
     else
-      subscription = create_subscription
+      create_subscription
     end
 
     head 201
@@ -23,8 +23,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def create_subscription
-    # use appropriate plan
-    subscription = customer.subscriptions.create(plan: 'personal')
+    subscription = customer.subscriptions.create(plan: repo.plan)
 
     repo.create_subscription(
       user_id: current_user.id,
