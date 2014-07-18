@@ -12,7 +12,7 @@ describe ActivationsController, '#create' do
       post :create, repo_id: repo.id, format: :json
 
       expect(response.code).to eq '201'
-      expect(response.body).to eq repo.to_json
+      expect(response.body).to eq RepoSerializer.new(repo).to_json
       expect(activator).to have_received(:activate).with(
         repo,
         AuthenticationHelper::GITHUB_TOKEN
