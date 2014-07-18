@@ -1,2 +1,17 @@
 %a.toggle{'href' => '', 'ng-click' => 'toggle()'}
 %span.name {{ repo.full_github_name }}
+#div{ 'ng-show' => 'showPaymentForm()' }
+  = form_tag do
+    = label_tag :card_number, 'Card Number'
+    = text_field_tag :card_number, nil, 'ng-model' => 'cardNumber'
+
+    = label_tag :expiration_month, 'Expiration Month'
+    = text_field_tag :expiration_month, nil, 'ng-model' => 'expirationMonth'
+
+    = label_tag :expiration_year, 'Expiration Year'
+    = text_field_tag :expiration_year, nil, 'ng-model' => 'expirationYear'
+
+    = label_tag :cvc, 'CVC'
+    = text_field_tag :cvc, nil, 'ng-model' => 'cvc'
+
+    = button_tag 'Subscribe', 'ng-click' => 'subscribe()'

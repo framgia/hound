@@ -98,6 +98,10 @@ a, label.toggle {
   }
 }
 
+label {
+  display: block;
+}
+
 ul, ol {
   list-style: none;
   margin: 0;
