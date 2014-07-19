@@ -1,8 +1,8 @@
-App.directive 'repo', ->
+App.directive 'repo', ['Subscription', (Subscription) ->
+  Stripe.setPublishableKey('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>')
+
   scope: true
-
   templateUrl: '/templates/repo'
-
   link: (scope, element, attributes) ->
     repo = scope.repo
     scope.processing = false
@@ -10,8 +10,10 @@ App.directive 'repo', ->
 
     activate = ->
       repo.$activate()
-        .then(-> scope.processing = false)
-        .catch(-> alert('Your repo failed to activate.'))
+        .then(->
+          scope.processing = false
+          scope.paying = false
+        ).catch(-> alert('Your repo failed to activate.'))
 
     deactivate = ->
       repo.$deactivate()
@@ -37,15 +39,23 @@ App.directive 'repo', ->
     scope.subscribe = ->
       event.preventDefault()
 
-      # Stripe.card.createToken(
-      #     number: $scope.cardNumber,
-      #     exp_month: $scope.expirationMonth,
-      #     exp_year: $scope.expirationYear,
-      #     cvc: $scope.cvc
-      #   , -> (status, response)
-      #     subscription = new Subscription(
-      #       repo_id: $scope.model.id,
-      #       card_token: response.id
-      #     )
-      #     subscription.$save()
-      # )
+      Stripe.card.createToken(
+        number: scope.cardNumber
+        exp_month: scope.expirationMonth
+        exp_year: scope.expirationYear
+        cvc: scope.cvc
+      , (status, response) ->
+        if response.error
+          alert('ahhhhh')
+        else
+          subscription = new Subscription(
+            repo_id: repo.id
+            card_token: response.id
+          )
+          subscription.$save().then(->
+            activate(repo)
+          , ->
+            alert('ahhhhh')
+          )
+      )
+]

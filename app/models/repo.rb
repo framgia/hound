@@ -23,7 +23,7 @@ class Repo < ActiveRecord::Base
       if in_organization
         'organization'
       else
-        'individual'
+        'personal'
       end
     else
       'free'
