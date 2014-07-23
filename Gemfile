@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.2'
 
 gem 'active_model_serializers'
 gem 'angularjs-rails'
@@ -17,7 +17,7 @@ gem 'neat'
 gem 'newrelic_rpm'
 gem 'octokit'
 gem 'omniauth-github'
-gem 'pg'
+gem 'mysql2'
 gem 'rails', '4.0.4'
 gem 'resque', '~> 1.22.0'
 gem 'resque-retry'

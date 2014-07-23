@@ -1,6 +1,6 @@
 development: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   database: hound_development
   pool: 5
 
