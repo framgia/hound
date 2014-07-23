@@ -1,13 +1,21 @@
 class CommitFile
-  attr_reader :contents
-
-  def initialize(file, contents)
+  def initialize(file, &contents_block)
     @file = file
-    @contents = contents
+    @contents_block = contents_block
   end
 
   def filename
     @file.filename
+  end
+
+  def contents
+    @contents ||= begin
+      if removed?
+        nil
+      else
+        @contents_block.call
+      end
+    end
   end
 
   def relevant_line?(line_number)

@@ -55,7 +55,7 @@ class PullRequest
   end
 
   def build_commit_file(file)
-    CommitFile.new(file, file_contents(file.filename))
+    CommitFile.new(file) { file_contents(file.filename) }
   end
 
   def file_contents(filename)
